@@ -8,8 +8,8 @@ def xtag(obj):
 def xtext(obj):
 	return obj.text
 
-def parse(iter, method):
-	for n in range(0,iter):
+def parse(iters, method):
+	for n in range(0,iters):
 		# Create list for row
 		row = []
 		for t in tagnames:
@@ -30,7 +30,7 @@ ns = {'xs': 'http://www.w3.org/2001/XMLSchema',
 tagnames = []
 
 # Import xml file and create ElementTree
-tree = etree.parse('kish_data.xml')
+tree = etree.parse('data.xml')
 
 # Extract dataset tag names from schema, 
 datasets = tree.xpath('//xs:element[@msprop:ImageColumns=""]', namespaces=ns)
