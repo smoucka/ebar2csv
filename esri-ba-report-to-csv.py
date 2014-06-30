@@ -5,7 +5,6 @@ class ReportParser(object):
 	'''
 	Parsing logic.
 	'''
-	
 	def __init__(self, arg=None):
 		'''
 		Digest input file argument.
