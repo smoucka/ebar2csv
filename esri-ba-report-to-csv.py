@@ -7,12 +7,17 @@ class ReportParser(object):
 	'''
 	
 	def __init__(self, arg=None):
+		'''
+		Digest input file argument.
+		'''
 		ap = argparse.ArgumentParser()
 		ap.add_argument('infile', help='XML input file')
 		self.arg = ap.parse_args()
 	
 	def main(self):
-		
+		'''
+		Create output CSV, extract tags/fields and parse XML using lxml.
+		'''
 		# Create CSV file, writer
 		csvfile = open('data_out.csv', 'wb')
 		self.csvwriter = csv.writer(csvfile)
@@ -28,7 +33,7 @@ class ReportParser(object):
 		# Import xml file and create ElementTree
 		self.tree = etree.parse(self.arg.infile)
 
-		# Extract dataset tag names from schema, 
+		# Extract dataset tag names from schema 
 		datasets = self.tree.xpath('//xs:element[@msprop:ImageColumns=""]', namespaces=ns)
 		for each in datasets:
 			self.tagnames.append(each.get('name'))
@@ -56,8 +61,10 @@ class ReportParser(object):
 		return obj.text
 
 	def parse(self, iters, method):
+		'''
+		Extract and append iteration
+		'''
 		for n in range(0,iters):
-			# Create list for row
 			row = []
 			for t in self.tagnames:
 				for child in self.tree.xpath('//'+t)[n].getchildren():
@@ -65,6 +72,11 @@ class ReportParser(object):
 			self.csvwriter.writerow(row)
 
 def launch():
+	'''
+	Launch instance of ReportParser
+	
+	Entry function for eventual command-line tool
+	'''
 	parser = ReportParser()
 	parser.main()
 		
