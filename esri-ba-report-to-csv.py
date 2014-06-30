@@ -63,6 +63,7 @@ class ReportParser(object):
 	def parse(self, iters, method):
 		'''
 		Extract and append iteration
+		Extract and append iteration
 		'''
 		for n in range(0,iters):
 			row = []
