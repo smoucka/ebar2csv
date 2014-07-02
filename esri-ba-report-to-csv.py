@@ -1,27 +1,28 @@
 from lxml import etree
-import csv, argparse, os, sys, inspect
+import csv, argparse, os
 
 class ReportParser(object):
 	'''
 	Parsing logic.
 	'''
-	def __init__(self, arg=None):
+	def __init__(self, args=None):
 		'''
 		Digest input file argument.
 		'''
 		ap = argparse.ArgumentParser()
 		ap.add_argument('infile', help='XML input file')
-		self.arg = ap.parse_args()
+		ap.add_argument('outfile', help='Output file name (sans extension)')
+		self.args = ap.parse_args()
 	
 	def main(self):
 		'''
 		Create output CSV, extract tags/fields and parse XML using lxml.
 		'''
 		# Create CSV file, writer
-		infile_path = os.path.abspath(self.arg.infile)
+		infile_path = os.path.abspath(self.args.infile)
 		head, tail = os.path.split(infile_path)
 		
-		csvfile = open(head+'\\'+'data_out.csv', 'wb')
+		csvfile = open(head + '\\' + self.args.outfile + '.csv', 'wb')
 		self.csvwriter = csv.writer(csvfile)
 
 		# Namespaces
@@ -33,7 +34,7 @@ class ReportParser(object):
 		self.tagnames = []
 
 		# Import xml file and create ElementTree
-		self.tree = etree.parse(self.arg.infile)
+		self.tree = etree.parse(self.args.infile)
 
 		# Extract dataset tag names from schema 
 		datasets = self.tree.xpath('//xs:element[@msprop:ImageColumns=""]', namespaces=ns)
