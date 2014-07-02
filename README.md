@@ -3,7 +3,7 @@
 
 Converts XML output from a ESRI Business Analyst report to CSV format.
 
-Use:
+Usage:
 ```
-python esri-ba-report-to-csv.py infile
+python esri-ba-report-to-csv.py infile outfile
 ```
