@@ -1,5 +1,5 @@
 from lxml import etree
-import csv, argparse
+import csv, argparse, os, sys, inspect
 
 class ReportParser(object):
 	'''
@@ -18,7 +18,10 @@ class ReportParser(object):
 		Create output CSV, extract tags/fields and parse XML using lxml.
 		'''
 		# Create CSV file, writer
-		csvfile = open('data_out.csv', 'wb')
+		infile_path = os.path.abspath(self.arg.infile)
+		head, tail = os.path.split(infile_path)
+		
+		csvfile = open(head+'\\'+'data_out.csv', 'wb')
 		self.csvwriter = csv.writer(csvfile)
 
 		# Namespaces
