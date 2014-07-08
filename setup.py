@@ -4,7 +4,7 @@ setup(
 	name='ebar2csv',
 	version='0.1.0',
 	author='smoucka',
-	description='Convert ESRI Business Analyst report output to CSV.',
+	description='Parses ESRI Business Analyst report output to CSV.',
 	packages=['ebar2csv'],
 	entry_points={
 		'console_scripts': [
